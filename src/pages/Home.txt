@@ -1,0 +1,44 @@
+import React from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+import Navbar from "../components/layouts/Navbar";
+import Sidebar from "../components/layouts/Sidebar";
+import Departments from "./Departments/Departments";
+import Members from "./Members/Members";
+
+const Dashboard = () => (
+  <div className="ml-52 mt-24 p-4 text-center">
+    <h1 className="text-xl font-bold">Dashboard</h1>
+  </div>
+);
+
+const Settings = () => (
+  <div className="ml-52 mt-24 p-4 text-center">
+    <h1 className="text-xl font-bold">Settings</h1>
+  </div>
+);
+
+
+const Home = () => {
+  return (
+    <>
+      {/* Navbar */}
+      <Navbar />
+      
+      {/* Sidebar */}
+      <Sidebar />
+      
+      {/* Routes for content */}
+      <Routes>
+        <Route path="dashboard" element={<Dashboard />} />
+        <Route path="departments" element={<Departments />} />
+        <Route path="members" element={<Members />} />
+        <Route path="settings" element={<Settings />} />
+        <Route path="*" element={<Dashboard />} />
+      </Routes>
+
+   
+    </>
+  );
+};
+
+export default Home;
