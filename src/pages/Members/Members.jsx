@@ -1,9 +1,10 @@
 import React from "react";
 import MemberCard from "./MemberCard";
-import members from "../../lib/members"
+import useLocalStorage from '../../hooks/useLocalStorage';
 
 const Members = () => {
-
+    const [members] = useLocalStorage('members', []);
+        
     return (
         <>
             {/* Dashboard Content */}

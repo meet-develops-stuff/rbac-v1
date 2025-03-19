@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import departmentsData from "../../lib/departments";
+import useLocalStorage from '../../hooks/useLocalStorage';
 import { Plus } from "lucide-react";
 import DepartmentTable from './DepartmentTable';
 import AddDepartmentModal from '../../components/modals/AddDepartmentModal';
 
 const Departments = () => {
-  const [departments, setDepartments] = useState(departmentsData);
+  const [departments, setDepartments] =  useLocalStorage('departments', []);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   
   const handleAddDepartment = (newDepartment) => {
