@@ -27,7 +27,7 @@ const AddDepartmentModal = ({ isOpen, onClose, onSubmit }) => {
             createdAt: new Date().toLocaleDateString(), // Current date as string
             lastEdited: new Date().toLocaleDateString(), // Current date as string
             totalMembers: 0,
-            // accessLevel: "Users",
+            accessLevel: "Users",
             permissions: ["create", "read", "update", "delete", "deploy"],
         };
 

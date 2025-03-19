@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { LayoutDashboard, SquareLibrary, Users, Settings, ChevronRight, ChevronLeft } from "lucide-react";
+import { LayoutDashboard, SquareLibrary, Users, Settings, ChevronRight, ChevronLeft, CircleUserRound, CircleHelp } from "lucide-react";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  
+
   // NavLink style function
   const getLinkClass = ({ isActive }) => {
     const baseClass = "flex items-center justify-left px-4 py-2 mx-2 ps-3 rounded-lg group";
@@ -12,7 +12,7 @@ const Sidebar = () => {
       ? `${baseClass} bg-gray-600 text-white`
       : `${baseClass} text-gray-900 hover:bg-gray-100`;
   };
-  
+
   return (
     <>
       {/* Toggle Button for Mobile */}
@@ -22,13 +22,12 @@ const Sidebar = () => {
       >
         {isOpen ? <ChevronLeft className="w-6 h-6" /> : <ChevronRight className="w-6 h-6" />}
       </button>
-      
+
       {/* Sidebar */}
       <aside
         id="default-sidebar"
-        className={`z-50 fixed top-24 left-0 w-50 h-screen bg-gray-400 transition-transform ${
-          isOpen ? "translate-x-0" : "-translate-x-full"
-        } sm:translate-x-0`}
+        className={`z-50 fixed top-24 left-0 w-50 h-screen bg-gray-400 transition-transform ${isOpen ? "translate-x-0" : "-translate-x-full"
+          } sm:translate-x-0`}
       >
         <div className="h-full">
           <ul className="space-y-2 font-medium pt-10">
@@ -69,8 +68,30 @@ const Sidebar = () => {
               </NavLink>
             </li>
           </ul>
+
+          <ul className="space-y-2 font-medium pt-58">
+            <li>
+              <NavLink
+                to="/help"
+                className={getLinkClass}
+              >
+                <CircleHelp className="w-5 h-5" />
+                <span className="ms-3">Help</span>
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink
+                to="/profile"
+                className={getLinkClass}
+              >
+                <CircleUserRound className="w-5 h-5" />
+                <span className="ms-3">Profile</span>
+              </NavLink>
+            </li>
+          </ul>
         </div>
-      </aside>
+      </aside >
     </>
   );
 };

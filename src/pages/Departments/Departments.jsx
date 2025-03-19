@@ -13,6 +13,15 @@ const Departments = () => {
     setDepartments([...departments, newDepartment]);
   };
 
+  const handleUpdateDepartment = (updatedDepartment) => {
+    // Find and update the department in the departments array
+    setDepartments(prevDepartments => 
+      prevDepartments.map(dept => 
+        dept.id === updatedDepartment.id ? updatedDepartment : dept
+      )
+    );
+  };
+
   return (
     <>
       {/* Dashboard Content */}
@@ -27,7 +36,10 @@ const Departments = () => {
             </button>
           </div>
           <div className="w-full">
-            <DepartmentTable departments={departments} />
+            <DepartmentTable 
+            departments={departments}
+            onUpdateDepartment={handleUpdateDepartment} 
+            />
           </div>
         </div>
       </main>

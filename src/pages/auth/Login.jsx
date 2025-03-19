@@ -2,7 +2,7 @@ import { Eye, EyeOff } from "lucide-react";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import LoginValidation from "../../components/auth/LoginValidation";
+import LoginValidation from "../../components/validations/LoginValidation";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 

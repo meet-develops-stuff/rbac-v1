@@ -5,12 +5,17 @@ import DeleteModal from "../../components/modals/DeleteModal";
 import ViewModal from "../../components/modals/ViewModal";
 import EditModal from "../../components/modals/EditModal";
 
-const DepartmentTable = ({ departments }) => {
+const DepartmentTable = ({ departments, onUpdateDepartment }) => {
 
     const [activeView, setActiveView] = useState(null);
     const [activeEdit, setActiveEdit] = useState(null);
     const [activeDelete, setActiveDelete] = useState(null);
-   
+
+    const handleUpdateDepartment = (updatedDepartment) => {
+        // Update the department in your departments array
+        onUpdateDepartment(updatedDepartment);
+    };
+
 
     return (
         <div className="overflow-x-auto bg-white shadow-md rounded-lg p-6">
@@ -61,12 +66,12 @@ const DepartmentTable = ({ departments }) => {
                                                 className="hover:text-blue-500 cursor-pointer"
                                                 onClick={() => setActiveEdit(department)}
                                             />
-
                                             {/* Edit Details Modal */}
                                             <EditModal
                                                 isOpen={activeEdit?.id === department.id}
                                                 onClose={() => setActiveEdit(null)}
                                                 department={department}
+                                                onSubmit={handleUpdateDepartment} // This is the function from Departments.jsx
                                             />
                                         </div>
                                     </Tooltip>

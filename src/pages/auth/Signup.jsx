@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import SignupValidation from "../../components/auth/SignupValidation";
+import SignupValidation from "../../components/validations/SignupValidation";
 
 const Signup = () => {
 

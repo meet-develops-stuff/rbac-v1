@@ -10,9 +10,12 @@ const members = [
             { title: "Project Beta", description: "E-commerce platform." }
         ],
         email: "test@gmil.com",
-        bio: "Passionate about AI",
-        location: "Banglore",
-        skills: ["Java", "Python"]
+        bio: "Expert in AI and leading software development projects.",
+        location: "Bangalore",
+        skills: ["Java", "Python"],
+        accessLevel: "Admin",
+        permissions: ["create", "read", "update", "delete", "deploy"],
+        department: "Software Development"
     },
     {
         id: 2,
@@ -24,23 +27,25 @@ const members = [
             { title: "Weather App", description: "Weather forecasting app." }
         ],
         email: "test@gmil.com",
-        bio: "Passionate about AI",
-        location: "Banglore",
-        skills: ["Java", "Python"]
+        bio: "Detail-oriented QA specialist ensuring software quality.",
+        location: "Bangalore",
+        skills: ["Java", "Python"],
+        accessLevel: "Editor",
+        permissions: ["read", "update", "test"],
+        department: "Quality Assurance"
     },
     {
         id: 3,
         name: "Claire Mac",
         image: "https://randomuser.me/api/portraits/women/26.jpg",
         socials: { twitter: "#", github: "#", website: "#" },
-        // projects: [
-        //     { title: "Social Media App", description: "A social network for travelers." },
-        //     { title: "Blog CMS", description: "A custom content management system." }
-        // ],
         email: "test@gmil.com",
-        bio: "Passionate about AI",
-        location: "Banglore",
-        skills: ["Java", "Python"]
+        bio: "System specialist managing IT infrastructure and security.",
+        location: "Bangalore",
+        skills: ["Java", "Python"],
+        accessLevel: "Moderator",
+        permissions: ["read", "update", "reset_password", "manage_access"],
+        department: "IT Support"
     },
     // {
     //     id: 4,
