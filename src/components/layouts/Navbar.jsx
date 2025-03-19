@@ -31,21 +31,27 @@ const Navbar = () => {
                     {/* Desktop Menu */}
                     <nav className="hidden md:block">
                         <ul className="flex gap-4">
-                            <li>
-                                <a className="text-sm font-medium text-gray-100 hover:opacity-75" href="/">
-                                    Dashboard
-                                </a>
-                            </li>
-                            <li>
-                                <a className="text-sm font-medium text-gray-100 hover:opacity-75" href="/">
-                                    Members
-                                </a>
-                            </li>
-                            <li>
-                                <a className="text-sm font-medium text-gray-100 hover:opacity-75" href="/">
-                                    Settings
-                                </a>
-                            </li>
+                            <Link to="/dashboard">
+                                <li>
+                                    <div className="text-sm font-medium text-gray-100 hover:opacity-75">
+                                        Dashboard
+                                    </div>
+                                </li>
+                            </Link>
+                            <Link to="/members">
+                                <li>
+                                    <div className="text-sm font-medium text-gray-100 hover:opacity-75">
+                                        Members
+                                    </div>
+                                </li>
+                            </Link>
+                            <Link to="/settings">
+                                <li>
+                                    <div className="text-sm font-medium text-gray-100 hover:opacity-75">
+                                        Settings
+                                    </div>
+                                </li>
+                            </Link>
                         </ul>
                     </nav>
                 </div>
@@ -90,7 +96,7 @@ const Navbar = () => {
                     </div>
                 </div>
             </div>
-        </header>
+        </header >
     );
 };
 

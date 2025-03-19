@@ -16,7 +16,7 @@ const Departments = () => {
   return (
     <>
       {/* Dashboard Content */}
-      <main className="sm:ml-50 p-4"> {/* Push content right to avoid sidebar overlap */}
+      <main className="sm:ml-50 p-4">
         <div className="bg-gray-300 p-6 pt-4 rounded-lg">
           <div className="flex justify-end mb-4">
             <button
