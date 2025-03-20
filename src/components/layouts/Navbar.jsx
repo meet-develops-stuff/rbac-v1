@@ -29,7 +29,7 @@ const Navbar = () => {
                     </div>
 
                     {/* Desktop Menu */}
-                    <nav className="hidden md:block">
+                    {/* <nav className="hidden md:block">
                         <ul className="flex gap-4">
                             <Link to="/dashboard">
                                 <li>
@@ -53,7 +53,7 @@ const Navbar = () => {
                                 </li>
                             </Link>
                         </ul>
-                    </nav>
+                    </nav> */}
                 </div>
 
                 {/* Right Section (Admin & Logout) */}
@@ -81,13 +81,12 @@ const Navbar = () => {
                             <Menu className="w-6 h-6" />
                         </button>
 
-                        {/* Mobile Dropdown Menu */}
                         {isOpen && (
                             <ul className="absolute right-0 mt-2 w-40 bg-gray-700 border border-gray-600 rounded-lg shadow-xl text-white">
-                                <li className="px-4 py-2 hover:bg-gray-600 cursor-pointer">Admin</li>
-                                <li className="px-4 py-2 hover:bg-gray-600 cursor-pointer">Dashboard</li>
-                                <li className="px-4 py-2 hover:bg-gray-600 cursor-pointer">Users</li>
-                                <li className="px-4 py-2 hover:bg-gray-600 cursor-pointer">Settings</li>
+                                {/* <li className="px-4 py-2 hover:bg-gray-600 cursor-pointer">Admin</li> */}
+                                {/* <li className="px-4 py-2 hover:bg-gray-600 cursor-pointer">Dashboard</li> */}
+                                {/* <li className="px-4 py-2 hover:bg-gray-600 cursor-pointer">Users</li> */}
+                                {/* <li className="px-4 py-2 hover:bg-gray-600 cursor-pointer">Settings</li> */}
                                 <li className="px-4 py-2 hover:bg-red-500 cursor-pointer" onClick={onSubmit}>
                                     Logout
                                 </li>

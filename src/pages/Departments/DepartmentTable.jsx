@@ -5,7 +5,7 @@ import DeleteModal from "../../components/modals/DeleteModal";
 import ViewModal from "../../components/modals/ViewModal";
 import EditModal from "../../components/modals/EditModal";
 
-const DepartmentTable = ({ departments, onUpdateDepartment }) => {
+const DepartmentTable = ({ departments, onUpdateDepartment, showToast }) => {
 
     const [activeView, setActiveView] = useState(null);
     const [activeEdit, setActiveEdit] = useState(null);
@@ -72,6 +72,7 @@ const DepartmentTable = ({ departments, onUpdateDepartment }) => {
                                                 onClose={() => setActiveEdit(null)}
                                                 department={department}
                                                 onSubmit={handleUpdateDepartment} // This is the function from Departments.jsx
+                                                showToast={showToast} // Pass the showToast function
                                             />
                                         </div>
                                     </Tooltip>

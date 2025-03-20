@@ -3,31 +3,45 @@ import useLocalStorage from '../../hooks/useLocalStorage';
 import { Plus } from "lucide-react";
 import DepartmentTable from './DepartmentTable';
 import AddDepartmentModal from '../../components/modals/AddDepartmentModal';
+import SuccessToast from '../../components/toast/SuccessToast';
 
 const Departments = () => {
-  const [departments, setDepartments] =  useLocalStorage('departments', []);
+  const [departments, setDepartments] = useLocalStorage('departments', []);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-  
+
+  // Toast State
+  const [toastOpen, setToastOpen] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+
   const handleAddDepartment = (newDepartment) => {
-    // Update departments state with the new department
     setDepartments([...departments, newDepartment]);
+    showToast("Department Added Successfully!");
   };
 
   const handleUpdateDepartment = (updatedDepartment) => {
-    // Find and update the department in the departments array
-    setDepartments(prevDepartments => 
-      prevDepartments.map(dept => 
+    setDepartments(prevDepartments =>
+      prevDepartments.map(dept =>
         dept.id === updatedDepartment.id ? updatedDepartment : dept
       )
     );
+    showToast("Department Updated Successfully!");
+  };
+
+  const showToast = (message) => {
+    setSuccessMessage(message);
+    setToastOpen(true);
+  };
+
+  const handleToastClose = () => {
+    setToastOpen(false);
   };
 
   return (
     <>
-      {/* Dashboard Content */}
       <main className="sm:ml-50 p-4">
         <div className="bg-gray-300 p-6 pt-4 rounded-lg">
-          <div className="flex justify-end mb-4">
+          <div className="flex justify-between items-center mb-4">
+            <h3 className="font-bold text-xl flex-1 text-center">Department Details</h3>
             <button
               className="flex items-center gap-x-2 bg-black px-6 py-2 text-white rounded-lg hover:cursor-pointer"
               onClick={() => setIsAddModalOpen(true)}
@@ -36,19 +50,27 @@ const Departments = () => {
             </button>
           </div>
           <div className="w-full">
-            <DepartmentTable 
-            departments={departments}
-            onUpdateDepartment={handleUpdateDepartment} 
+            <DepartmentTable
+              departments={departments}
+              onUpdateDepartment={handleUpdateDepartment}
+              showToast={showToast} // Pass the showToast function
             />
           </div>
         </div>
       </main>
-      
-      {/* Add Department Modal */}
-      <AddDepartmentModal 
+
+      <AddDepartmentModal
         isOpen={isAddModalOpen}
         onClose={() => setIsAddModalOpen(false)}
-        onSubmit={handleAddDepartment} // Pass the function as a prop
+        onSubmit={handleAddDepartment}
+        departments={departments}
+      />
+
+      {/* Success Toast */}
+      <SuccessToast
+        message={successMessage}
+        open={toastOpen}
+        onClose={handleToastClose}
       />
     </>
   );
