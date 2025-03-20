@@ -1,53 +1,47 @@
-import { ChevronDown, X } from 'lucide-react';
-import React, { useState, useEffect } from "react";
-import SuccessToast from "../toast/SuccessToast"; // Ensure the path is correct
+import { ChevronDown, X } from "lucide-react";
+import React, { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import DepartmentValidation from "../../components/validations/DepartmentValidation";
 
 const EditModal = ({ department, isOpen, onClose, onSubmit, showToast }) => {
-    const [departmentData, setDepartmentData] = useState({
-        name: "",
-        id: "",
-        description: "",
-        manager: "",
-        accessLevel: "",
-        permissions: []
+    const {
+        register,
+        handleSubmit,
+        reset,
+        setValue,
+        formState: { errors },
+    } = useForm({
+        resolver: yupResolver(DepartmentValidation),
     });
 
     const accessLevels = ["Admin", "Manager", "Editor", "User"];
 
+    // Sync form with department data when modal opens
     useEffect(() => {
         if (department) {
-            setDepartmentData({
+            reset({
                 name: department.name || "",
                 id: department.id || "",
                 description: department.description || "",
                 manager: department.manager || "",
                 accessLevel: department.accessLevel || "",
-                permissions: department.permissions || []
+                permissions: department.permissions || [],
             });
         }
-    }, [department]);
+    }, [department, reset]);
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setDepartmentData(prev => ({
-            ...prev,
-            [name]: value
-        }));
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
+    // Handle form submission
+    const handleFormSubmit = (data) => {
         const updatedDepartment = {
             ...department,
-            ...departmentData,
-            lastEdited: new Date().toLocaleDateString()
+            ...data,
+            lastEdited: new Date().toLocaleDateString(),
         };
 
         onSubmit(updatedDepartment);
-
         showToast("Department Updated Successfully!");
-
+        reset();
         onClose();
     };
 
@@ -58,72 +52,62 @@ const EditModal = ({ department, isOpen, onClose, onSubmit, showToast }) => {
             <div className="bg-white rounded-lg shadow-xl w-full max-w-md mx-4">
                 <div className="flex justify-between items-center border-b p-4">
                     <h3 className="font-semibold text-lg">Edit Department</h3>
-                    <button
-                        onClick={onClose}
-                        className="text-gray-500 hover:text-gray-700"
-                    >
+                    <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
                         <X />
                     </button>
                 </div>
 
-                <form onSubmit={handleSubmit} className="p-4">
+                <form onSubmit={handleSubmit(handleFormSubmit)} className="p-4">
+                    {/* Department Name */}
                     <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="department-name">
                             Department Name
                         </label>
                         <input
+                            {...register("name")}
                             id="department-name"
-                            name="name"
-                            value={departmentData.name}
-                            onChange={handleChange}
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            required
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline"
                         />
+                        <p className="text-red-500 text-sm mt-1">{errors.name?.message}</p>
                     </div>
 
+                    {/* Manager */}
                     <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="manager-name">
                             Manager
                         </label>
                         <input
+                            {...register("manager")}
                             id="manager-name"
-                            name="manager"
-                            value={departmentData.manager}
-                            onChange={handleChange}
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            required
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline"
                         />
+                        <p className="text-red-500 text-sm mt-1">{errors.manager?.message}</p>
                     </div>
 
+                    {/* Description */}
                     <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="description">
                             Description
                         </label>
                         <textarea
+                            {...register("description")}
                             id="description"
-                            name="description"
-                            value={departmentData.description}
-                            onChange={handleChange}
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline"
                             rows="3"
                         />
+                        <p className="text-red-500 text-sm mt-1">{errors.description?.message}</p>
                     </div>
 
+                    {/* Access Level */}
                     <div className="mb-4">
-                        <label
-                            className="block text-gray-700 text-sm font-bold mb-2"
-                            htmlFor="accessLevel"
-                        >
+                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="accessLevel">
                             Access Level
                         </label>
                         <div className="relative">
                             <select
+                                {...register("accessLevel")}
                                 id="accessLevel"
-                                name="accessLevel"
-                                value={departmentData.accessLevel}
-                                onChange={handleChange}
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline cursor-pointer"
-                                required
+                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline cursor-pointer"
                             >
                                 <option value="" disabled>
                                     Select Access Level
@@ -137,10 +121,11 @@ const EditModal = ({ department, isOpen, onClose, onSubmit, showToast }) => {
                             <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
                                 <ChevronDown className="w-5 h-5 text-gray-700" />
                             </div>
+                            <p className="text-red-500 text-sm mt-1">{errors.accessLevel?.message}</p>
                         </div>
                     </div>
 
-
+                    {/* Buttons */}
                     <div className="flex justify-end">
                         <button
                             type="button"

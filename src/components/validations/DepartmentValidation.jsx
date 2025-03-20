@@ -14,7 +14,9 @@ const DepartmentValidation = Yup.object({
   accessLevel: Yup.string()
     .oneOf(["Admin", "Manager", "Editor", "User"], "Invalid access level")
     .required("Access Level is required"),
-  description: Yup.string().required("Description is required"),
+  description: Yup.string()
+  .required("Description is required")
+  .max(200, "Description limit exceeded :("),
 });
 
 export default DepartmentValidation;
